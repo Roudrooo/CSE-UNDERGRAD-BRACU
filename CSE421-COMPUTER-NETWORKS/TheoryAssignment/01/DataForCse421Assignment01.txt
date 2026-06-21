@@ -1,0 +1,33 @@
+DNS:
+
+
+15:03:12.566202 IP 192.168.0.101.63271 > 103.60.172.20.53: 42237+ A? youtube.com. (29)
+
+15:03:12.577259 IP 103.60.172.20.53 > 192.168.0.101.63271: 42237 1/0/0 A 172.217.24.174 (45)
+
+
+
+
+
+
+3 WAY:
+
+00:42:19.036336 IP 192.168.0.101.63355 > lcmaaa-bc-in-f14.1e100.net.https: Flags [SEW], seq 734606397, win 65535, options [mss 1460,nop,wscale 6,nop,nop,TS val 839234960 ecr 0,sackOK,eol], length 0 
+
+00:42:19.068882 IP lcmaaa-bc-in-f14.1e100.net.https > 192.168.0.101.63355: Flags [S.], seq 2207914837, ack 734606398, win 65535, options [mss 1270,sackOK,TS val 1835883152 ecr 839234960,nop,wscale 8], length 0
+
+00:42:19.069127 IP 192.168.0.101.63355 > lcmaaa-bc-in-f14.1e100.net.https: Flags [.], ack 1, win 2064, options [nop,nop,TS val 839234993 ecr 1835883152], length 0
+
+
+
+
+
+4 WAY:
+
+00:42:19.190960 IP 192.168.0.101.63355 > lcmaaa-bc-in-f14.1e100.net.https: Flags [F.], seq 826, ack 2894, win 2048, options [nop,nop,TS val 839235115 ecr 1835883273], length 0
+
+00:42:19.197201 IP lcmaaa-bc-in-f14.1e100.net.https > 192.168.0.101.63355: Flags [.], ack 826, win 384, options [nop,nop,TS val 1835883280 ecr 839235115], length 0
+
+00:42:19.219849 IP lcmaaa-bc-in-f14.1e100.net.https > 192.168.0.101.63355: Flags [F.], seq 2933, ack 827, win 1050, options [nop,nop,TS val 1835883303 ecr 839235114], length 0
+
+00:42:19.545905 IP 192.168.0.101.63355 > lcmaaa-bc-in-f14.1e100.net.https: Flags [R], seq 734607224, win 0, length 0

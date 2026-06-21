@@ -1,0 +1,7 @@
+WebServer: 
+http://www.educationboardresults.gov.bd/
+
+103.230.107.233
+
+MY MAC:
+192.168.0.118 

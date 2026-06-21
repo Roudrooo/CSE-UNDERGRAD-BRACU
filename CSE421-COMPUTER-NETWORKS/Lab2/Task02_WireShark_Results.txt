@@ -1,0 +1,110 @@
+Visited WebSite: http://www.educationboardresults.gov.bd/
+WebSite IP: 103.230.107.233
+
+My PC IP: 192.168.0.118 
+
+
+HTTP Request: 
+	
+	1. Frame: 
+			
+			Frame is PDU for Data Link Layer. 
+
+	2. Ethernet II: 
+
+			MAC (Media Access Control) address: 48 bit; Hexadecimal	 					format; Used in Data Link Layer.
+		
+				Source: d2:07:36:b3:d7:1f
+				Destination: 34:60:f9:29:28:d4
+
+	3. Internet Protocol:
+			
+			Version: IPV4
+			
+			IP Address: Used in Network Layer; 32 bit; PDU is Packet.
+
+				Source: 192.168.0.118
+				Destination: 103.230.104.203
+
+	4. TCP (Transmission Control Protocol): Transport Layer; PDU is 		segment; Uses Port address.
+
+		Source Port: 56098
+		Destination Port: 80
+
+	5. HTTP (Hypertext Transfer Protocol): 
+
+		Request Line:
+			Get method to get information.
+			Url: /
+			Version: HTTP/1.1
+
+		Header Line:
+			Header field name: Value cr lf
+
+			Host is www.educationboardresults.gov.bd
+
+			Connection will be kept alive after one request, meaning 					persistent
+
+			Browser is Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) 				AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 					Safari/537.36
+			
+			Accept text/html,application/xhtml+xml,application/							xml;q=0.9,image/avif,image/webp,image/apng,*/										*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+			Accept encoding in gzip
+
+			Accept language en-GB,en-US;q=0.9,en;q=0.8
+
+			carriage return character: \r
+
+			line-feed character: \n
+
+
+
+HTTP Response: 
+		
+	1. Frame: 
+			
+			Frame is PDU for Data Link Layer. 
+
+	2. Ethernet II: 
+
+			MAC (Media Access Control) address: 48 bit; Hexadecimal	 					format; Used in Data Link Layer.
+		
+				Source: 34:60:f9:29:28:d4
+				Destination: d2:07:36:b3:d7:1f
+
+	3. Internet Protocol:
+			
+			Version: IPV4
+			
+			IP Address: Used in Network Layer; 32 bit; PDU is Packet.
+
+				Source: 103.230.104.203
+				Destination: 192.168.0.118
+
+	4. TCP (Transmission Control Protocol): Transport Layer; PDU is 		segment; Uses Port address.
+
+		Source Port: 80
+		Destination Port: 56109
+
+	5. HTTP (Hypertext Transfer Protocol):
+
+		Status Line:
+			Version: HTTP/1.1
+			Status code: 200
+			Response phase: OK
+
+		Header Line:
+			Header field name: Value cr lf
+
+			Date: Wed, 04 Mar 2026 17:26:39 GMT\r\n
+
+			Content-Type: text/html; charset=UTF-8\r\n
+
+			Connection will be kept alive after one request, meaning 					persistent
+
+			carriage return character: \r
+
+			line-feed character: \n
+
+
+
