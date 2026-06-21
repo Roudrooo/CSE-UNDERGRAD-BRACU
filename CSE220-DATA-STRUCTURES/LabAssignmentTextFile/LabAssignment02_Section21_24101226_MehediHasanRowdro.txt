@@ -1,0 +1,238 @@
+//Task01
+public static Node alternateMerge( Node head1, Node head2 ){
+    
+    //You’re NOT ALLOWED to create a new singly linked list for this task
+
+    //TO DO
+    Node tail1=head1,tail2=head2,temp1,temp2;
+    while(tail1!=null&&tail2!=null){
+        temp1=tail1.next; // Keeping next position in hand
+        temp2=tail2.next;
+        tail1.next=tail2;
+        if(temp1==null){ // If 1st linked list is shorter
+            tail2.next=temp2; // Linking with the same list(2nd)
+            break;
+        }
+        tail2.next=temp1;
+        tail1=temp1;
+        tail2=temp2;
+    }
+    //remove the following line when returning the Head of the modified LinkedList
+    return head1;
+}
+
+
+//Task02
+public static Node wordDecoder( Node head ){
+    
+    //You're suppose to create a new Dummy headed Singly Linked List in this method
+    //Dummy head is basically a head Node where the elem is null
+    // Node dHead = new Node(null, null); here the dHead is a Dummy Head
+
+    //TO DO
+    int count=0;
+    Node tail=head;
+    while(tail!=null){
+        count++;
+        tail=tail.next;
+    }
+    tail=head;
+    Node dHead=new Node(null,null),dTail=dHead;
+    int idx=0,step=13%count;
+    while(tail!=null){
+        if(idx%step==0&&idx!=0){
+            dTail.next=tail;
+            dTail=dTail.next;
+        }
+        tail=tail.next;
+        idx++;
+    }
+    if(dTail!=null){ // If there is any character left in the last
+        dTail.next=null; 
+    }
+    dTail=dHead.next;
+    Node prv=null,nxt;
+    while(dTail!=null){
+        nxt=dTail.next;
+        dTail.next=prv;
+        prv=dTail;
+        dTail=nxt;
+    }
+    dHead.next=prv;
+    //remove the following line when you're ready to return the new head
+    return dHead;
+}
+
+
+//Task03
+public static Node idGenerator(Node head1, Node head2, Node head3) {
+    
+    //TO DO
+    //Hint: the Node elements are actually Object, you can type cast them
+    //      into int or Integer like the following:
+    //        (int)n.elem  or  (Integer)n.elem
+    Node tail1=head1,tail2=head2,tail3=head3;
+    Node prv=null,nxt;
+    while(tail1!=null){
+        nxt=tail1.next;
+        tail1.next=prv;
+        prv=tail1;
+        tail1=nxt;
+    }
+    Node revHead1=prv;
+    Node sumHead=new Node(null,null),sumTail=sumHead;
+    int sum;
+    while(tail2!=null&&tail3!=null){
+        if(((int)tail2.elem+(int)tail3.elem)>9){
+            sum=((int)tail2.elem+(int)tail3.elem)%10;
+        }else{
+            sum=(int)tail2.elem+(int)tail3.elem;
+        }
+        sumTail.next=new Node(sum,null);
+        sumTail=sumTail.next;
+        tail2=tail2.next;
+        tail3=tail3.next;
+    }
+    Node revTail1=revHead1;
+    while(revTail1.next!=null) revTail1=revTail1.next;
+    revTail1.next=sumHead.next;
+    return revHead1; // Remove this when you're ready to return the new head
+}
+
+
+//Task04
+//Patient Class
+public class Patient{
+
+    public Integer id;
+    public String name;
+    public Integer age;
+    public String bloodGroup;
+    public Patient next; //this points to the next patient
+    public Patient prev; //this points to the previous patient
+
+    public Patient(Integer id,String name,Integer age,String bloodGroup,Patient next,Patient prev){
+        // To Do
+        this.id=id;
+        this.name=name;
+        this.age=age;
+        this.bloodGroup=bloodGroup;
+        this.next=next;
+        this.prev=prev;
+    }
+
+}
+
+//WRM class
+public class WRM {
+    Patient dh;
+
+    //The constructor is already created for you
+    public WRM() {
+        dh = new Patient(null, null, null, null, null, null);
+        dh.next = dh;
+        dh.prev = dh;
+    }
+
+    public void registerPatient(int id, String name, int age, String bloodgroup) {
+        // To Do
+        Patient newPatient=new Patient(id,name,age,bloodgroup,dh,dh.prev);
+        dh.prev.next=newPatient;
+        dh.prev=newPatient;
+        System.out.println("Success (A patient has been registered).");
+    }
+
+    public void servePatient() {
+        // To do
+        if(canDoctorGoHome()){
+            System.out.println("No patient to serve.");
+        }else{
+            Patient firstPatient=dh.next;
+            System.out.println("Serving the patient: "+firstPatient.name);
+            dh.next=firstPatient.next;
+            firstPatient.next.prev=dh;
+        }
+    }
+
+    public void showAllPatient() {
+        // To Do
+        if(canDoctorGoHome()){
+            System.out.println("No patient available.");
+        }else{
+            Patient shwPat=dh.next;
+            int i=1;
+            while(shwPat!=dh){
+                System.out.printf("%d. Patient id: %d; Name: %s; Age: %d; Bloodgroup: %s\n",i++,shwPat.id,shwPat.name,shwPat.age,shwPat.bloodGroup);
+                shwPat=shwPat.next;
+            }
+        }
+    }
+
+    public boolean canDoctorGoHome() {
+        // To Do
+        if(dh.next==dh&&dh.prev==dh) return true;
+        else return false; // Delete this line once you're ready
+    }
+
+    public void cancelAll() {
+        // To Do
+        dh.next=dh;
+        dh.prev=dh;
+        System.out.println("Success (All appointments have been canceled).");
+
+    }
+
+
+    public void reverseTheLine() {
+        // To Do
+        Patient revPet=dh.next,temp=null;
+        while(revPet!=dh){
+            temp=revPet.prev;
+            revPet.prev=revPet.next;
+            revPet.next=temp;
+            revPet=revPet.prev;
+        }
+        dh.next=temp.prev;
+        System.out.println("Success (Patient line have been reversed).");
+    }
+}
+
+//WRMTester
+public class WRMTester {
+    public static void main(String[] args) {
+        System.out.println("** Welcome to Waiting Room Management System **");
+        // To Do
+        // Create WRM Object and call the necessary methods
+        WRM manage=new WRM();
+        manage.registerPatient(10001,"ABC",20,"O+");
+        manage.registerPatient(10002,"BCD",35,"O-");
+        manage.registerPatient(10003,"CDE",23,"B-");
+        manage.registerPatient(10004,"DEF",67,"A+");
+        manage.registerPatient(10005,"EFG",45,"B+");
+        System.out.println("\nAll patients:\n");
+        manage.showAllPatient();
+        System.out.println("\nServing a patient:\n");
+        manage.servePatient();
+        System.out.println("Serving a patient:");
+        manage.servePatient();
+        System.out.println("\nAll patients:\n");
+        manage.showAllPatient();
+        System.out.print("\nDoctor can go home: ");
+        if(manage.canDoctorGoHome()) System.out.println("Yes\n");
+        else System.out.println("No\n");
+        manage.registerPatient(10006,"FGH",18,"Ab-");
+        manage.registerPatient(10007,"GHI",87,"A-");
+        manage.registerPatient(10008,"HIJ",02,"AB-");
+        System.out.println("\nReversing this patient line\n");
+        manage.reverseTheLine();
+        System.out.println("\nAll patients:\n");
+        manage.showAllPatient();
+        System.out.println("\nServing a patient\n");
+        manage.servePatient();
+        System.out.println("\nCancelling all appointment\n");
+        manage.cancelAll();
+        System.out.print("\nDoctor can go home: ");
+        if(manage.canDoctorGoHome()) System.out.println("Yes\n");
+        else System.out.println("No\n");
+    }
+}

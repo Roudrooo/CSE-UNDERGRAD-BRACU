@@ -1,0 +1,64 @@
+// Task01
+
+public static Integer lowestCommonAncestor( BSTNode root, Integer x, Integer y ){
+        if(root!=null){
+            if(x<root.elem&&y<root.elem) return lowestCommonAncestor(root.left, x, y);
+            else if(x>root.elem&&y>root.elem) return lowestCommonAncestor(root.right, x, y);
+            return root.elem;
+        }
+        return 0;
+    }
+
+
+
+// Task02
+
+public static String findPath( BSTNode root, Integer key ){
+        if(root==null) return "No Path Found";
+        if(root.elem==key){
+            return ""+key;
+        }
+        String path;
+        if(key<root.elem){
+            path=findPath(root.left,key);
+        }else{
+            path=findPath(root.right,key);
+        }
+        if(path=="No Path Found"){
+            return path;
+        }else{
+            return root.elem+" "+path;
+        }
+    }
+
+
+
+// Task03
+
+public static Integer sumOfLeaves( BSTNode root, Integer sum ){
+        if(root!=null){
+            if(root.left==null&&root.right==null){
+                return sum+root.elem;
+            }
+            Integer initial=sumOfLeaves(root.left,sum);
+            Integer total=sumOfLeaves(root.right,initial);
+            return total;
+        }
+        return sum;
+    }
+
+
+
+// Task04
+
+public static Integer mirrorSum( BSTNode root ){
+        if(root!=null){
+            return MrrSmHlpr(root.left,root.right);
+        }
+        return 0;
+    }
+
+    private static Integer MrrSmHlpr(BSTNode left,BSTNode right){
+        if(left==null||right==null) return 0;
+        return left.elem+right.elem+MrrSmHlpr(left.left,right.right)+MrrSmHlpr(left.right,right.left);
+    }

@@ -1,0 +1,128 @@
+// Task01
+
+    public static void walkZigzag( Integer[][] matrix ){
+
+        //For this task you don't need to create new arrays
+
+        //TO DO
+        int row=matrix.length,column=matrix[0].length;
+        for(int c=0;c<column;++c){
+            if(c%2==0){
+                for(int r=0;r<row;r+=2){
+                    System.out.print(matrix[r][c]+" ");
+                }
+            }else{
+                if((row-1)%2==0){
+                    for(int r=row-2;r>=0;r-=2){
+                        System.out.print(matrix[r][c]+" ");
+                    }
+                }else{
+                    for(int r=row-1;r>=0;r-=2){
+                        System.out.print(matrix[r][c]+" ");
+                    }
+                }
+            }
+            System.out.println();
+        }
+        
+    }
+
+
+// Task02
+
+    public static Integer[] decryptMatrix( Integer[][] matrix ){
+
+        //For this task you'll need to create new arrays
+        //we recommend you to use Integer type.
+        //example:  Integer[] array = new Integer[5]
+
+        //TO DO
+        int row=matrix.length,column=matrix[0].length;
+        Integer[] resultArr=new Integer[column-1];
+        for(int c=0;c<column-1;++c){
+            int sum=0;
+            for(int r=0;r<row;++r){
+                sum+=matrix[r][c+1]-matrix[r][c];
+            }
+            resultArr[c]=sum;
+        }
+        //DELETE the following return statement when you're ready to return the 2D array
+        return resultArr;
+
+    }
+
+
+// Task03
+
+    public static Integer rowRotation( Integer examWeek, String[][] matrix ){
+
+        //For this task you don"t need to create new arrays
+        //After rotation the Matrix should be printed inside the method
+        //Only the integer row number is to be returned
+
+        //TO DO
+        int row=matrix.length,column=matrix[0].length;
+        for(int week=1;week<examWeek;++week){
+            for(int r=row-1;r>0;--r){
+                for(int c=0;c<column;++c){
+                    String temp=matrix[r][c];
+                    matrix[r][c]=matrix[r-1][c];
+                    matrix[r-1][c]=temp;
+                }
+            }
+        }
+        Integer search=-1;
+        for(int r=0;r<row;r++){
+            for(int c=0;c<column;c++){
+                System.out.print("| "+matrix[r][c]+"  ");
+                if("AA".equals(matrix[r][c])) search=r+1;
+            }
+            System.out.println("|");
+        }
+        return search;
+    }
+
+
+// Task04
+
+    public static Integer[][] compressMatrix( Integer[][] matrix ){
+
+        //For this task you'll need to create new 2D array
+        
+        //TO DO
+        int row=matrix.length,column=matrix[0].length,compressedRow=row/2,compressedColumn=column/2;
+        Integer[][] resultArr=new Integer[compressedRow][compressedColumn];
+        for(int r=0;r<compressedRow;++r){
+            int sum=0;
+            for(int c=0;c<compressedColumn;++c){
+                sum+=matrix[2*r][2*c]+matrix[2*r+1][2*c]+matrix[2*r][2*c+1]+matrix[2*r+1][2*c+1];
+                resultArr[r][c]=sum;
+            }
+        }
+        //remove the line below and return the newly created Compressed 2D matrix
+        return resultArr;
+    }
+
+
+// Task05
+
+    public static void playGame( Integer[][] arena ){
+
+        //For this task you don't need to create any new 2D array
+        //just print the result inside the function
+        
+        //TO DO
+        int row=arena.length,column=arena[0].length,points=0;
+        for(int r=0;r<row;++r){
+            for(int c=0;c<column;++c){
+                if(arena[r][c]%50==0&&arena[r][c]!=0){
+                    if(r>0&&arena[r-1][c]==2) points+=2;
+                    if(r<row-1&&arena[r+1][c]==2) points+=2;
+                    if(c>0&&arena[r][c-1]==2) points+=2;
+                    if(c<column-1&&arena[r][c+1]==2) points+=2;
+                }
+            }
+        }
+        if(points>9) System.out.printf("Points Gained: %d. Your team has survived the game.\n",points);
+        else System.out.printf("Points Gained: %d. Your team is out.\n",points);
+    }

@@ -1,0 +1,93 @@
+//Task01
+public static Integer[] mergeSortedArray( Integer[] arr1, Integer[] arr2 ){
+
+    //TO DO
+    int a=arr1.length,b=arr2.length;
+    Integer[] merged=new Integer[a+b];
+    int i=0,j=0,k=0;
+    while(i<a&&j<b){ // Getting null in the last
+        if(arr1[i]<arr2[j]) merged[k++]=arr1[i++]; 
+        else merged[k++]=arr2[j++];
+    }
+    while(i<a) merged[k++]=arr1[i++]; // Managing the nulls if i isn't filled up
+    while(j<b) merged[k++]=arr2[j++]; // Managing the nulls if j isn't filled up
+
+    //DELETE the following return statement when you're ready to return the newly Created array
+    return merged;
+
+}
+
+//Task02
+public static void mostWater( Integer[] height ){
+
+    //TO DO
+    int i=0,n=height.length-1,area,maxArea=0;
+
+    while(i<n){
+        if(height[i]<height[n]){
+            area=height[i]*(n-i);
+            i++;
+        }else{
+            area=height[n]*(n-i);
+            n--;
+        }
+        if(area>maxArea){
+            maxArea=area;
+        }
+    }
+    System.out.println(maxArea);
+}
+
+//Task03
+public static String checkSimilar( Node building1, Node building2 ){
+    
+    //You're not suppose to create any new Linked List for this task
+    
+    //TODO
+    Node temp1=building1,temp2=building2;
+    while(temp1!=null&&temp2!=null){
+        if(!temp1.elem.equals(temp2.elem)){
+            return "Not Similar";
+        }
+        temp1=temp1.next;
+        temp2=temp2.next;
+    }
+    //Once you're ready to return the String delete the
+    //following line
+    if(temp1!=null||temp2!=null) return "Not Similar";
+    else return "Similar";
+}
+
+//Task04
+public static Boolean assembleCongaLine(Node head){
+    
+    //You're not suppose to create any new Linked List for this task
+
+    //TODO
+    //Hint: the Node elements are actually Object, you can type cast them
+    //      into int or Integer like the following:
+    //        (int)n.elem  or  (Integer)n.elem
+    Node temp=head;
+    while(temp.next!=null){
+        if((int)temp.elem>(int)temp.next.elem){
+            return false;
+        }
+        temp=temp.next;
+    }
+    
+    //When you're ready to return the boolean remove the following line
+    return true;
+}
+
+//Task05
+public static int sumDist(Node head, Integer[] distArr) {
+    // To Do
+    int count=0;
+    Node tail=head;
+    while(tail!=null){
+        count++;
+        tail=tail.next;
+    }
+    
+    return 0; // Remove this line.
+}

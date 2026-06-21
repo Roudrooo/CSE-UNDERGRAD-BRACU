@@ -1,0 +1,311 @@
+// Task 01
+
+import java.util.Random;
+
+public class MinHeapTester{
+    public static void main(String[] args) {
+        Random rand=new Random();
+
+        MinHeap minHeap=new MinHeap(15);
+        for(int i=1;i<=10;i++){
+            minHeap.insert(rand.nextInt(100));
+        }
+        System.out.println("MIN HEAP:");
+        minHeap.printHeap();
+
+        System.out.println("Inserting a value.");
+        minHeap.insert(26);
+        System.out.println("MIN HEAP:");
+        minHeap.printHeap();
+
+        System.out.println("Deleting a value");
+        minHeap.delete(26);
+        System.out.println("MIN HEAP:");
+        minHeap.printHeap();
+
+        System.out.println("Extracting minimum value which is: "+minHeap.extractMin());
+
+        System.out.println("SORTED MIN HEAP");
+        minHeap.printSorted();
+}
+
+
+public class MinHeap{
+    private int heap[];
+    private int size;
+
+    public MinHeap(int capacity){
+        heap=new int[capacity];
+        size=1;
+    }
+
+    public void insert(int value){
+        if(size==heap.length) System.out.println("Heap is full.");
+        else{
+            heap[size]=value;
+            swim(size);
+            size++;
+        }
+    }
+
+    public void swim(int index){
+        if(index>1&&heap[index]<heap[parent(index)]){
+            swap(index,parent(index));
+            swim(parent(index));
+        }
+    }
+
+    public void swap(int i,int j){
+        int temp=heap[i];
+        heap[i]=heap[j];
+        heap[j]=temp;
+    }
+
+    public int parent(int index){
+        return index/2;
+    }
+
+    public void sink(int index){
+        int smallest=index;
+        int left=2*index;
+        int right=2*index+1;
+        if(left<size&&heap[smallest]>heap[left]) smallest=left;
+        if(right<size&&heap[smallest]>heap[right]) smallest=right;
+        if(smallest!=index){
+            swap(index,smallest);
+            sink(smallest);
+        }
+    }
+
+    public int extractMin(){
+        if(size==0) throw new IllegalStateException("Heap is full");
+        int minValue=heap[1];
+        swap(1,size-1);
+        size--;
+        sink(1);
+        return minValue;
+    }
+
+    public void delete(int key){
+        boolean flag=false;
+        int i=1;
+        while(i<size){
+            if(key==heap[i]){
+                flag=true;
+                break;
+            }
+            i++;
+        }
+        if(!flag) System.out.println("Not found");
+        swap(i,size-1);
+        size--;
+        sink(i);
+    }
+
+    public void heapSort(){
+        int originalSize=size;
+        for(int i=size-1;i>1;i--){
+            swap(1,i);
+            size--;
+            sink(1);
+        }
+        size=originalSize;
+    }
+
+    public void printHeap(){
+        for(int i=1;i<size-1;i++){
+            System.out.print(heap[i]+" ");
+        }
+        System.out.println();
+    }
+
+    public void printSorted(){
+        heapSort();
+        printHeap();
+    }
+
+}
+
+
+
+
+
+
+// Task 02
+
+import java.util.Random;
+
+public class MaxHeapTester{
+    public static void main(String[] args) {
+        Random rand=new Random();
+
+        
+        MaxHeap maxHeap=new MaxHeap(15);
+        for(int i=1;i<=10;i++){
+            maxHeap.insert(rand.nextInt(100));
+        }
+        System.out.println("MAX HEAP:");
+        maxHeap.printHeap();
+
+        System.out.println("Inserting a value.");
+        maxHeap.insert(26);
+        System.out.println("MAX HEAP:");
+        maxHeap.printHeap();
+
+        System.out.println("Deleting a value");
+        maxHeap.delete(26);
+        System.out.println("MAX HEAP:");
+        maxHeap.printHeap();
+
+        System.out.println("Extracting maximum value which is: "+maxHeap.extractMax());
+
+        System.out.println("SORTED MAX HEAP");
+        maxHeap.printSorted();
+}
+
+
+public class MaxHeap{
+    private int heap[];
+    private int size;
+
+    public MaxHeap(int capacity){
+        heap=new int[capacity];
+        size=1;
+    }
+
+    public void insert(int value){
+        if(size==heap.length) System.out.println("Heap is full.");
+        else{
+            heap[size]=value;
+            swim(size);
+            size++;
+        }
+    }
+
+    public void swim(int index){
+        if(index>1&&heap[index]>heap[parent(index)]){
+            swap(index,parent(index));
+            swim(parent(index));
+        }
+    }
+
+    public void swap(int i,int j){
+        int temp=heap[i];
+        heap[i]=heap[j];
+        heap[j]=temp;
+    }
+
+    public int parent(int index){
+        return index/2;
+    }
+
+    public void sink(int index){
+        int largest=index;
+        int left=2*index;
+        int right=2*index+1;
+        if(left<size&&heap[largest]<heap[left]) largest=left;
+        if(right<size&&heap[largest]<heap[right]) largest=right;
+        if(largest!=index){
+            swap(index,largest);
+            sink(largest);
+        }
+    }
+
+    public int extractMax(){
+        if(size==0) throw new IllegalStateException("Heap is full");
+        int maxValue=heap[1];
+        swap(1,size-1);
+        size--;
+        sink(1);
+        return maxValue;
+    }
+
+    public void delete(int key){
+        boolean flag=false;
+        int i=1;
+        while(i<size){
+            if(key==heap[i]){
+                flag=true;
+                break;
+            }
+            i++;
+        }
+        if(!flag) System.out.println("Not found");
+        swap(i,size-1);
+        size--;
+        sink(i);
+    }
+
+    public void heapSort(){
+        int originalSize=size;
+        for(int i=size-1;i>1;i--){
+            swap(1,i);
+            size--;
+            sink(1);
+        }
+        size=originalSize;
+    }
+
+    public void printHeap(){
+        for(int i=1;i<size-1;i++){
+            System.out.print(heap[i]+" ");
+        }
+        System.out.println();
+    }
+
+    public void printSorted(){
+        heapSort();
+        printHeap();
+    }
+
+}
+
+
+
+
+
+
+// Task 03
+
+
+
+
+
+
+// Task 04
+
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+
+public class HeapTester{
+    public static void main(String[] args) {
+        Random rand=new Random();
+        MaxHeap maxHeap4=new MaxHeap(15);
+        Scanner input=new Scanner(System.in);
+        for(int i=1;i<=10;i++){
+            maxHeap4.insert(rand.nextInt(100));
+        }
+        System.out.println("MAX HEAP:");
+        maxHeap4.printHeap();
+        
+        System.out.println("Enter the value of K between 1 to 10");
+        int k=input.nextInt();
+        if(k>=1&&k<=10){
+            System.out.println(Arrays.toString(maxHeap4.nLargest(k)));
+        }
+        else System.out.println("Invalid input");
+    }
+}
+
+public int[] nLargest(int k){
+        int[] arr=new int[k];
+        heapSort();
+        int i=size-1,index=0;
+        while(k!=0&&i>=1){
+            arr[index]=heap[i--];
+            k--;
+            index++;
+        }
+        return arr;
+    }

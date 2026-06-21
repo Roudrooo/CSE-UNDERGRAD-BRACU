@@ -1,0 +1,213 @@
+//Task01
+
+public PairNode( String k, Integer v ){
+        this.key=k;
+        this.value=v;
+        this.next=null;
+    }
+
+private int hashFunction( String key ){
+        String s=key;
+        int sum=0;
+        if(s.length()%2!=0) s+='N';
+        for(int i=0;i<s.length()-1;i+=2){
+            String x=Integer.toString((int)s.charAt(i))+Integer.toString((int)s.charAt(i+1));
+            sum+=Integer.parseInt(x);
+        }
+        return sum%ht.length;
+    }
+
+public String searchHashtable( Object[] keyValuePair ){
+        String key=(String)keyValuePair[0];
+        int index=hashFunction(key);
+        PairNode current=ht[index];
+        while(current!=null){
+            if(current.key.equals(key)){
+                return "Found";
+            }
+            current=current.next;
+        }
+        return "Not Found";
+    }
+
+
+
+//Task02
+
+public FruitNode(String name, Integer price){
+        fruit[0]=name;
+        fruit[1]=price;
+        next=null;
+    }
+
+private int hashFunction( String key ){
+        String s=key;
+        int sum=0;
+        if(s.length()%2==0){
+            for(int i=0;i<s.length();i+=2){
+                sum+=(int)s.charAt(i);
+            }
+        }else{
+            for(int i=1;i<s.length();i+=2){
+                sum+=(int)s.charAt(i);
+            }
+        }
+        return sum%ht.length;
+    }
+
+public void insert(String key, Integer value){
+        int index=hashFunction(key);
+        FruitNode current=ht[index];
+        while(current!=null){
+            if(current.fruit[0].equals(key)){
+                current.fruit[1]=value;
+                return;
+            }
+            current=current.next;
+        }
+        FruitNode newNode=new FruitNode(key,value);
+        newNode.next=ht[index];
+        ht[index]=newNode;
+    }
+
+
+
+//Task03
+
+public PairNode( Integer k, String v ){
+        key=k;
+        value=v;
+        next=null;
+    }
+
+private int hashFunction( Integer key ){
+        return (key+3)%ht.length;
+    }
+
+public void remove( Integer key ){
+        Integer index=hashFunction(key);
+        PairNode current=ht[index];
+        PairNode prev=null;
+        while(current!=null){
+            if(current.key.equals(key)){
+                if(prev==null){
+                    ht[index]=current.next;
+                }else{
+                    prev.next=current.next;
+                }
+                return;
+            }
+            prev=current;
+            current=current.next;
+        }
+    }
+
+
+
+//Task04
+
+public static int diamondCount(Stack stack, String str) {
+        // To Do
+        Stack stk1=new Stack(),stk2=new Stack();
+        int dCount=0;
+        int cnt1=0;
+        int cnt2=0;
+        for(int i=0;i<str.length();++i){
+            if(str.charAt(i)=='>') stk1.push(1);
+            else if(str.charAt(i)=='<') stk2.push(2);
+            while(!stk1.isEmpty()){
+                stk1.pop();
+                cnt1++;
+            }
+            while(!stk2.isEmpty()){
+                stk2.pop();
+                cnt2++;
+            } 
+            if(cnt1<cnt2) dCount=cnt1;
+            else if(cnt1>cnt2) dCount=cnt2;
+	    else dCount=cnt1;
+        }
+        return dCount;
+    }
+
+
+
+//Task05
+
+public static void removeBlock(Stack stack, int n) {
+        Stack stk=new Stack();
+        while(!stack.isEmpty()){
+            stk.push(stack.pop());
+        }
+        for(int i=1;i<n;i++){
+            stack.push(stk.pop());
+        }
+        stk.pop();
+        while(!stk.isEmpty()){
+            stack.push(stk.pop());
+        }
+    }
+
+
+
+//Task06
+
+public static Stack conditionalReverse(Stack stack) {
+        Stack stk=new Stack();
+        stk.push(stack.pop());
+        while(!stack.isEmpty()){
+            if(!(stack.peek().equals(stk.peek()))){
+                stk.push(stack.pop());
+            }else{
+                stack.pop();
+            }
+        }
+        return stk;
+    }
+
+
+
+//Task07
+
+public void enqueueCall(int customerId, boolean isVip) {
+        if(isVip){
+            this.vipQueue.enqueue(customerId);
+            System.out.printf("Customer %d added to VIP queue.\n",customerId);
+        }else{
+            this.regularQueue.enqueue(customerId);
+            System.out.printf("Customer %d added to Regular queue.\n",customerId);
+        }
+    }
+
+public void dequeueCall() {
+        if(vipQueue.isEmpty()&&regularQueue.isEmpty()){
+            System.out.println("No calls in the queue.");
+            return;
+        } 
+        if(!vipQueue.isEmpty()){
+            System.out.printf("Processing VIP Customer %d.\n",vipQueue.dequeue());
+        }else{
+            System.out.printf("Processing Regular Customer %d.\n",regularQueue.dequeue());
+        }
+    }
+
+public void displayQueue() {
+        LinkedListQueue tempVip=new LinkedListQueue();
+        LinkedListQueue tempReg=new LinkedListQueue();
+        while(!vipQueue.isEmpty()) tempVip.enqueue(vipQueue.dequeue());
+        while(!regularQueue.isEmpty()) tempReg.enqueue(regularQueue.dequeue());
+        System.out.print("VIP Queue:\nQueue (front to rear): ");
+        while(!tempVip.isEmpty()){
+            int x=tempVip.peek();
+            System.out.print(x+" -> ");
+            vipQueue.enqueue(tempVip.dequeue());
+        }
+        System.out.println("NULL");
+        System.out.print("Regular Queue:\nQueue (front to rear): ");
+        while(!tempReg.isEmpty()){
+            int x=tempReg.peek();
+            System.out.print(x+" -> ");
+            regularQueue.enqueue(tempReg.dequeue());
+        }
+        System.out.println("NULL");
+    }
