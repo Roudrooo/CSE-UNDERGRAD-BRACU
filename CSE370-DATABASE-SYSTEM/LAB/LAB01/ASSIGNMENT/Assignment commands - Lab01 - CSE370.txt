@@ -1,0 +1,33 @@
+Assignment commands - Lab01 - CSE370 
+
+1. show databases
+
+2. CREATE DATABASE Marathon_24101226
+
+3. show databases
+
+4. use Marathon_24101226
+
+5. (Q1) create table runners(student_id int, student_name varchar(50), email varchar(50), distance_covered int, time_taken_mins int);
+
+6. show tables;
+
+7. describe runners;
+
+8. (Q2) insert into runners (student_id, student_name, email, distance_covered, time_taken_mins) values (101, 'Mikasa Ackerman', 'mikasa.a@g.bracu.ac.bd', 5, 35), (102, 'Edward Elric', 'e.elric@iub.ac.bd', 10, 59), (103, 'Riza Hawkeye', 'riza.h@ewu.ac.bd', 5, 38), (104, 'Bruce Wayne', 'b.wayne@g.bracu.ac.bd', 10, 63), (105, 'Peter Parker', 'p.parker@iub.ac.bd', 5, 33), (106, 'Alphonse Elric', 'a.elric@iub.ac.bd', 10, 55), (107, 'Son Goku', 'son.goku@g.bracu.ac.bd', 5, 46), (108, 'Gon Freecss', 'gon.f@g.bracu.ac.bd', 10, 68), (109, 'Tanjiro Kamado', 'tanjiro.k@g.bracu.ac.bd', 5, 29), (110, 'Roy Mustang', 'roy.m@ewu.ac.bd', 10, 83);
+
+9. (Q3) select * from runners where distance_covered > 7;
+
+10. (Q4) select lower(student_name) from runners order by time_taken_mins desc;
+
+11. (Q5) ALTER TABLE runners CHANGE distance_covered total_distance DECIMAL(3,1);
+
+12. (Q6) ALTER TABLE runners ADD kmh DECIMAL(3,1);
+
+13. (Q7)  UPDATE runners SET kmh = (total_distance * 60) / time_taken_mins;
+
+14. (Q8) SELECT student_id, student_name, kmh, (total_distance / 10) * (time_taken_mins / 60) * 100 as points FROM runners;
+
+15. (Q9) SELECT student_name FROM runners WHERE total_distance = 10 AND time_taken_mins BETWEEN 40 AND 60;
+
+16. (Q10) SELECT student_name FROM runners WHERE email LIKE '%@g.bracu.ac.bd';

@@ -1,0 +1,7 @@
+lColor(0, 0, 1)
+    # glVertex2f(-.35, -.185)
+    # glVertex2f(.35, -.185)
+    # glVertex2f(.35, .185)
+    # glVertex2f(.35, .185)
+    # glVertex2f(-.35, .185)
+    # glVertex2f(-.35, -.185)

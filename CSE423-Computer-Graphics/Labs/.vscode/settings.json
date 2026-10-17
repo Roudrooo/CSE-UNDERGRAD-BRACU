@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./Lab01/First Program"
+    ],
+    "python-envs.defaultEnvManager": "ms-python.python:system"
+}
